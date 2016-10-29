@@ -1,0 +1,21 @@
+sudo: false
+language: java
+jdk:
+  - oraclejdk8
+cache:
+  directories:
+    - $HOME/.boot/cache/bin
+    - $HOME/.boot/cache/lib
+    - $HOME/.m2
+    - $HOME/bin
+install:
+  - mkdir -p ~/bin
+  - export PATH=~/bin:$PATH
+  - curl -L https://github.com/boot-clj/boot-bin/releases/download/2.5.2/boot.sh -o ~/bin/boot
+  - chmod +x ~/bin/boot
+script:
+  - boot lint
+  - boot test
+  - boot dev -d
+  - boot build
+  - boot devcards
