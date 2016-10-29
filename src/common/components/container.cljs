@@ -8,16 +8,20 @@
   {:connection js/React.PropTypes.object
    :dispatch js/React.PropTypes.func})
 
-(def context
+(def parent-mixin
   "Parent container mixin."
   {:child-context #(-> % :rum/args first)
    :class-properties {:childContextTypes context-types}})
+
+(def mixin
+  "Child item mixin."
+  {:class-properties {:contextTypes context-types}})
 
 ;; --------- Template
 
 (rum/defc template
   "Container template."
-  < context
+  < parent-mixin
   [_ child]
   child)
 

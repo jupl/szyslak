@@ -3,8 +3,8 @@
   (:require
    [rum.core :as rum]))
 
-(def root-style
-  "Application page styling."
+(def page-style
+  "Application root styling."
   {:flex 1
    :display "flex"
    :justifyContent "center"
@@ -16,7 +16,7 @@
 (rum/defc template
   "Application root template."
   []
-  [:div {:style root-style} "Hello, World"])
+  [:div {:style page-style} "Hello, World"])
 
 ;; --------- Component
 
