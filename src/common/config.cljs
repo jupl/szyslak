@@ -9,3 +9,9 @@
 
 ;; When stringifying keywords, include namespaces
 (extend-type Keyword IEncodeJS (-clj->js [s] (subs (str s) 1)))
+
+(def base-url
+  "Base URL for application assets."
+  (cond
+    (identical? hot-reload true) "http://localhost:3000/"
+    (exists? js/__dirname) (str "file://" js/__dirname "/")))
