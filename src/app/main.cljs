@@ -2,6 +2,7 @@
   "Entry point for application."
   (:require
    [app.components.root :as root]
+   [color.messenger :as color]
    [common.components.container :as container]
    [common.config :refer-macros [when-production]]
    [common.messenger :refer [create-messenger dispatch]]
@@ -51,6 +52,7 @@
     (reload/add-handler render))
 
   ;; Register handlers to messenger
+  (color/register messenger connection)
 
   ;; Start application
   (dispatch messenger :initialize)

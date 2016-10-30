@@ -1,22 +1,19 @@
 (ns app.components.root
   "Application root component structure."
   (:require
+   [color.components.page :as color-page]
    [rum.core :as rum]))
 
 (def page-style
   "Application root styling."
-  {:flex 1
-   :display "flex"
-   :justifyContent "center"
-   :alignItems "center"
-   :background "linear-gradient(transparent, gainsboro)"})
+  {:flex 1})
 
 ;; --------- Template
 
 (rum/defc template
   "Application root template."
   []
-  [:div {:style page-style} "Hello, World"])
+  (color-page/component {:style page-style}))
 
 ;; --------- Component
 
