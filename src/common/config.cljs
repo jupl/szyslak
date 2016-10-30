@@ -7,9 +7,6 @@
 ;; If true then hot reloading is available
 (goog-define hot-reload false)
 
-;; When stringifying keywords, include namespaces
-(extend-type Keyword IEncodeJS (-clj->js [s] (subs (str s) 1)))
-
 (def base-url
   "Base URL for application assets."
   (cond
