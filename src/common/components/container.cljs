@@ -17,6 +17,10 @@
   "Child item mixin."
   {:class-properties {:contextTypes context-types}})
 
+(def get-context
+  "Extract context from component."
+  #(-> % .-context js->clj))
+
 ;; --------- Template
 
 (rum/defc template
