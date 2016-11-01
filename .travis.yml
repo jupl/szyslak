@@ -16,6 +16,5 @@ install:
 script:
   - boot lint
   - boot test
-  - boot dev -d
   - boot build
   - boot devcards
