@@ -1,6 +1,12 @@
 (ns common.config
   "Configuration macros used across the project.")
 
+;; If true then application is a production environment
+#?(:cljs (goog-define production false))
+
+;; If true then hot reloading is available
+#?(:cljs (goog-define hot-reload false))
+
 (defmacro when-production
   "Helper for evaluating code if (not) in production for tree shaking."
   [flag & body]
