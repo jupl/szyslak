@@ -10,7 +10,7 @@
 
 (def parent-mixin
   "Parent container mixin."
-  {:child-context #(-> % :rum/args first)
+  {:child-context #(-> % :rum/args first (dissoc :component))
    :class-properties {:childContextTypes context-types}})
 
 (def mixin
@@ -27,8 +27,8 @@
 (rum/defc template
   "Container template."
   < parent-mixin
-  [_ child]
-  child)
+  [{:keys [component]}]
+  (component))
 
 ;; --------- Component
 
