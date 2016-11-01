@@ -23,8 +23,8 @@
 
 (defn get-context
   "Extract context from component."
-  [comp]
-  #?(:cljs (-> comp .-context (js->clj :keywordize-keys true))
+  [component]
+  #?(:cljs (-> component .-context (js->clj :keywordize-keys true))
      :clj *context*))
 
 ;; --------- Template
