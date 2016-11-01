@@ -36,11 +36,12 @@
   (let [container (js/document.getElementById "container")
         style (.-style container)
         props {:connection connection
-               :dispatch (partial dispatch messenger)}]
+               :dispatch (partial dispatch messenger)
+               :component root/component}]
     (set! (.-cssText container) "")
     (doseq [[key val] container-style]
       (aset style (clj->js key) (clj->js val)))
-    (rum/mount (container/component props (root/component)) container)))
+    (rum/mount (container/component props) container)))
 
 (defn- -main
   "Application entry point."
