@@ -17,9 +17,10 @@
   "Child item mixin."
   {:class-properties {:contextTypes context-types}})
 
-(def get-context
+(defn get-context
   "Extract context from component."
-  #(-> % .-context (js->clj :keywordize-keys true)))
+  [comp]
+  (-> comp .-context (js->clj :keywordize-keys true)))
 
 ;; --------- Template
 
