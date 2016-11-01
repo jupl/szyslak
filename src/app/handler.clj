@@ -37,8 +37,8 @@
     [{:keys [route-params]}]
     (let [connection (create-conn nil)]
       (transact! connection
-       [{:db/id 0 :app.router/handler handler}
-        {:db/id 0 :app.router/route-params (or route-params {})}])
+                 [{:db/id 0 :app.router/handler handler}
+                  {:db/id 0 :app.router/route-params (or route-params {})}])
       {:status 200
        :headers {"Content-Type" "text/html"}
        :body (home-page {:connection connection})})))
