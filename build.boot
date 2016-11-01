@@ -115,7 +115,6 @@
   []
   (comp
    (sift :include #{#"\.clj[cs]?$"})
-   (check/with-yagni)
    (check/with-eastwood)
    (check/with-kibit)
    (check/with-bikeshed)))
