@@ -24,8 +24,9 @@
   []
   (let [container (js/document.getElementById "container")
         props {:connection connection
-               :dispatch (partial dispatch messenger)}]
-    (rum/mount (container/component props (root/component)) container)))
+               :dispatch (partial dispatch messenger)
+               :component root/component}]
+    (rum/mount (container/component props) container)))
 
 (defn- update-route
   "Update DataScript with new routing information."

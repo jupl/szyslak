@@ -25,7 +25,7 @@
       (include-css "/assets/normalize.css")]
      [:body
       [:div#container {:style "min-height:100vh;display:flex"}
-       (render-html (container/component props (root/component)))]
+       (render-html (container/component props))]
       [:script {:type "text/javascript"}
        "window.__DB__=" (json/write-str (write-transit-str @connection)) ";"]
       (include-js "/app.js")])))
@@ -35,13 +35,14 @@
   [handler]
   (fn request-handler
     [{:keys [route-params]}]
-    (let [connection (create-conn nil)]
+    (let [connection (create-conn)]
       (transact! connection
                  [{:db/id 0 :app.router/handler handler}
                   {:db/id 0 :app.router/route-params (or route-params {})}])
       {:status 200
        :headers {"Content-Type" "text/html"}
-       :body (home-page {:connection connection})})))
+       :body (home-page {:connection connection
+                         :component root/component})})))
 
 (def handler
   "Finalized application Ring handler."
