@@ -19,7 +19,7 @@
 
 (def get-context
   "Extract context from component."
-  #(-> % .-context js->clj))
+  #(-> % .-context (js->clj :keywordize-keys true)))
 
 ;; --------- Template
 
