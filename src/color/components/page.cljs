@@ -50,8 +50,7 @@
   "Application root component."
   < rum/reactive container/mixin
   [comp {:keys [style]}]
-  (let [connection (.. comp -context -connection)
-        dispatch (.. comp -context -dispatch)
+  (let [{:keys [connection dispatch]} (container/get-context comp)
         db (rum/react connection)]
     (template {:style style
                :color (q color-query db)
