@@ -3,15 +3,19 @@
   (:require
    [rum.core :as rum]))
 
+(def ^:dynamic *context*
+  "Represents context for server-side rendering."
+  nil)
+
 (def context-types
   "Types used for context."
-  {:connection js/React.PropTypes.object
-   :dispatch js/React.PropTypes.func})
+  #?(:cljs {:connection js/React.PropTypes.object
+            :dispatch js/React.PropTypes.func}))
 
 (def parent-mixin
   "Parent container mixin."
-  {:child-context #(-> % :rum/args first)
-   :class-properties {:childContextTypes context-types}})
+  #?(:cljs {:child-context #(-> % :rum/args first)
+            :class-properties {:childContextTypes context-types}}))
 
 (def mixin
   "Child item mixin."
@@ -20,7 +24,8 @@
 (defn get-context
   "Extract context from component."
   [comp]
-  (-> comp .-context (js->clj :keywordize-keys true)))
+  #?(:cljs (-> comp .-context (js->clj :keywordize-keys true))
+     :clj *context*))
 
 ;; --------- Template
 

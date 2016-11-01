@@ -3,22 +3,31 @@
  :resource-paths #{"resources"}
  :dependencies '[[adzerk/boot-cljs              "1.7.228-1" :scope "test"]
                  [adzerk/boot-reload            "0.4.13"    :scope "test"]
+                 [adzerk/boot-test              "1.1.2"     :scope "test"]
                  [binaryage/devtools            "0.8.2"     :scope "test"]
                  [binaryage/dirac               "0.7.4"     :scope "test"]
                  [crisptrutski/boot-cljs-test   "0.2.1"     :scope "test"]
-                 [datascript                    "0.15.4"    :scope "test"]
                  [devcards                      "0.2.2"     :scope "test" :exclusions [cljsjs/react cljsjs/react-dom]]
-                 [org.clojure/clojure           "1.8.0"     :scope "test"]
                  [org.clojure/clojurescript     "1.9.293"   :scope "test"]
                  [org.clojure/core.async        "0.2.395"   :scope "test"]
                  [pandeiro/boot-http            "0.7.3"     :scope "test"]
                  [powerlaces/boot-cljs-devtools "0.1.2"     :scope "test"]
-                 [rum                           "0.10.7"    :scope "test"]
-                 [tolitius/boot-check           "0.1.3"     :scope "test"]])
+                 [tolitius/boot-check           "0.1.3"     :scope "test"]
+                 [rum                           "0.10.7"    :only [server-render]]
+                 [bidi                          "2.0.13"]
+                 [datascript                    "0.15.4"]
+                 [datascript-transit            "0.2.2"]
+                 [hiccup                        "1.0.5"]
+                 [org.clojure/clojure           "1.8.0"]
+                 [org.clojure/data.json         "0.2.6"]
+                 [org.immutant/immutant         "2.1.5"]
+                 [ring/ring-core                "1.5.0"]
+                 [ring/ring-defaults            "0.2.1"]])
 
 (require
  '[adzerk.boot-cljs              :refer [cljs]]
  '[adzerk.boot-reload            :refer [reload]]
+ '[adzerk.boot-test              :refer [test] :rename {test test-clj}]
  '[crisptrutski.boot-cljs-test   :refer [test-cljs]]
  '[powerlaces.boot-cljs-devtools :refer [cljs-devtools]]
  '[pandeiro.boot-http            :refer [serve]]
@@ -36,8 +45,15 @@
   "target")
 
 ;; Define default task options used across the board.
-(task-options! reload {:on-jsload 'common.reload/handle}
-               serve {:dir target-path}
+(task-options! aot {:namespace '#{app.main}}
+               jar {:main 'app.main}
+               pom {:project 'app
+                    :version "0.1.0"}
+               reload {:on-jsload 'common.reload/handle
+                       :asset-path "public"}
+               serve {:dir target-path
+                      :handler 'app.handler/handler
+                      :reload true}
                target {:dir #{target-path}}
                test-cljs {:exit? true :js-env :phantom})
 
@@ -48,32 +64,37 @@
                                     [:closure-defines 'common.config/production]
                                     true)]
     (comp
-     (sift :include #{#"^devcards"} :invert true)
+     (sift :include #{#"^public/devcards"} :invert true)
      (cljs :optimizations :advanced
            :compiler-options prod-closure-opts)
      (sift :include #{#"\.out" #"\.cljs\.edn$" #"^\." #"/\."} :invert true)
+     (aot)
+     (pom)
+     (uber)
+     (sift :include #{#"\.clj$"} :invert true)
+     (jar)
+     (sift :include #{#"^project.jar$"})
      (target))))
 
 (deftask dev
-  "Produce a development build."
+  "Start server locally with dev tools and live updates."
   [d devcards  bool "Include devcards in build."
-   s server    bool "Start a local server with dev tools and live updates."
    p port PORT int  "The port number to start the server in."]
-
   (let [dev-closure-opts (assoc-in closure-opts
                                    [:closure-defines 'common.config/hot-reload]
-                                   server)
-        tasks [(if server (serve :port port))
-               (if server (watch))
-               (if server (speak))
-               (if-not devcards (sift :include #{#"^devcards"} :invert true))
-               (if server (reload))
-               (if server (cljs-devtools))
+                                   true)
+        tasks [(serve :port port)
+               (sift :include #{#"\.clj$"} :invert true)
+               (watch)
+               (speak)
+               (if-not devcards
+                 (sift :include #{#"^public/devcards"} :invert true))
+               (reload)
+               (cljs-devtools)
                (cljs :source-map true
                      :optimizations :none
                      :compiler-options dev-closure-opts)
                (sift :include #{#"\.cljs\.edn$" #"^\." #"/\."} :invert true)
-               (if-not server (sift :include #{#"\.out"} :invert true))
                (target)]]
     (apply comp (remove nil? tasks))))
 
@@ -81,10 +102,11 @@
   "Produce a build containing devcards only with optimizations."
   []
   (comp
-   (sift :include #{#"^(?!devcards).*\.cljs\.edn$"} :invert true)
+   (sift :include #{#"^public/(?!devcards).*\.cljs\.edn$"} :invert true)
    (cljs :optimizations :advanced
          :compiler-options closure-opts)
-   (sift :include #{#"^assets/" #"^devcards(?!\.(cljs\.edn|out))"})
+   (sift :include #{#"^public/assets/"
+                    #"^public/devcards(?!\.(cljs\.edn|out))"})
    (target)))
 
 (deftask lint
@@ -92,10 +114,14 @@
   []
   (comp
    (sift :include #{#"\.clj[cs]?$"})
+   (check/with-yagni)
+   (check/with-eastwood)
    (check/with-kibit)
    (check/with-bikeshed)))
 
 (deftask test
   "Run all tests."
   []
-  (test-cljs))
+  (comp
+   (test-clj)
+   (test-cljs)))
