@@ -1,4 +1,4 @@
-(ns common.devcards
+(ns org.project.common.devcards
   "Entry point for devcards, referencing all devcards."
   (:require
    ;; Require any devcards you want to show
