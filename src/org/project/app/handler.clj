@@ -55,6 +55,7 @@
   [& args]
   (require '[ring.middleware.reload])
   (require '[ring.middleware.stacktrace])
-  (let [wrap-reload (resolve 'ring.middleware.reload/wrap-reload)
-        wrap-stacktrace (resolve 'ring.middleware.stacktrace/wrap-stacktrace)]
-    (apply (-> handler wrap-reload wrap-stacktrace) args)))
+  (defonce -wrap-reload (resolve 'ring.middleware.reload/wrap-reload))
+  (defonce -wrap-stacktrace (resolve 'ring.middleware.stacktrace/wrap-stacktrace))
+  (defonce -dev-handler (-> handler -wrap-stacktrace -wrap-reload))
+  (apply -dev-handler args))
