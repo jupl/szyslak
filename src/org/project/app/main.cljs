@@ -8,7 +8,7 @@
    [org.project.app.config :refer [routes]]
    [org.project.common.components.container :as container]
    [org.project.common.config :refer-macros [when-production]]
-   [org.project.common.db :refer [update-route!]]
+   [org.project.common.db :refer [update-in-server! update-route!]]
    [org.project.common.messenger :refer [create-messenger dispatch]]
    [org.project.common.reload :as reload]
    [pushy.core :as pushy]
@@ -47,4 +47,5 @@
 
   ;; Start application
   (dispatch messenger :initialize)
-  (js/setTimeout render))
+  (js/setTimeout render)
+  (js/setTimeout #(update-in-server! connection)))

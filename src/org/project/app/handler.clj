@@ -9,7 +9,7 @@
    [org.project.app.config :refer [routes]]
    [org.project.app.components.root :as root]
    [org.project.common.components.container :as container]
-   [org.project.common.db :refer [update-route!]]
+   [org.project.common.db :refer [update-in-server! update-route!]]
    [ring.middleware.resource :refer [wrap-resource]]
    [rum.core :refer [render-html]]))
 
@@ -40,6 +40,7 @@
           route {:handler handler :route-params route-params}
           props {:connection connection :component root/component}]
       (update-route! connection route)
+      (update-in-server! connection)
       {:status 200
        :headers {"Content-Type" "text/html"}
        :body (home-page props)})))
