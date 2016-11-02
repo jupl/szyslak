@@ -50,7 +50,7 @@
       (make-handler bidi-handler)
       (wrap-resource "public")))
 
-(defn dev-handler
+(defn- dev-handler
   "Application Ring handler with wrappers for development server."
   [& args]
   (require '[ring.middleware.reload])
