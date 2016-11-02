@@ -49,3 +49,12 @@
   (-> routes
       (make-handler bidi-handler)
       (wrap-resource "public")))
+
+(defn dev-handler
+  "Application Ring handler with wrappers for development server."
+  [& args]
+  (require '[ring.middleware.reload])
+  (require '[ring.middleware.stacktrace])
+  (let [wrap-reload (resolve 'ring.middleware.reload/wrap-reload)
+        wrap-stacktrace (resolve 'ring.middleware.stacktrace/wrap-stacktrace)]
+    (apply (-> handler wrap-reload wrap-stacktrace) args)))

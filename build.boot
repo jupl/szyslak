@@ -52,9 +52,7 @@
                     :version "0.1.0"}
                reload {:on-jsload 'common.reload/handle
                        :asset-path "public"}
-               serve {:dir target-path
-                      :handler 'app.handler/handler
-                      :reload true}
+               serve {:handler 'app.handler/dev-handler}
                target {:dir #{target-path}}
                test-cljs {:exit? true :js-env :phantom})
 

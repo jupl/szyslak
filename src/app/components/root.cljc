@@ -25,6 +25,5 @@
   [comp]
   ;; TODO Fix server side rendering issue
   (let [db (-> comp container/get-context :connection rum/react)
-        [handler] #?(:cljs (q route-query db)
-                     :clj [:home])]
+        [handler] (q route-query db)]
     (template {:handler handler})))
