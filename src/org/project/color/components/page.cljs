@@ -1,9 +1,9 @@
-(ns color.components.page
+(ns org.project.color.components.page
   "Color page component structure."
   (:require
-   [color.db :refer [color-query]]
-   [common.components.container :as container]
    [datascript.core :refer [q]]
+   [org.project.color.db :refer [color-query]]
+   [org.project.common.components.container :as container]
    [rum.core :as rum]))
 
 (def background-style
