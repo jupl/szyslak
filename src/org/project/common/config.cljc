@@ -1,4 +1,4 @@
-(ns common.config
+(ns org.project.common.config
   "Configuration macros used across the project.")
 
 ;; If true then application is a production environment

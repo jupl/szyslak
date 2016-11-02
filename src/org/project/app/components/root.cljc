@@ -1,11 +1,11 @@
-(ns app.components.root
+(ns org.project.app.components.root
   "Application root component structure."
   (:require
-   [app.components.home :as home]
-   [app.components.not-found :as not-found]
-   [common.db :refer [route-query]]
-   [common.components.container :as container]
    [datascript.core :refer [q]]
+   [org.project.app.components.home :as home]
+   [org.project.app.components.not-found :as not-found]
+   [org.project.common.db :refer [route-query]]
+   [org.project.common.components.container :as container]
    [rum.core :as rum]))
 
 ;; --------- Template
@@ -23,7 +23,6 @@
   "Application root component."
   < rum/reactive container/mixin
   [comp]
-  ;; TODO Fix server side rendering issue
   (let [db (-> comp container/get-context :connection rum/react)
         [handler] (q route-query db)]
     (template {:handler handler})))

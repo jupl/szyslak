@@ -1,15 +1,15 @@
-(ns app.handler
+(ns org.project.app.handler
   "Application ring handler."
   (:require
-   [app.config :refer [routes]]
-   [app.components.root :as root]
    [bidi.ring :refer [make-handler]]
    [clojure.data.json :as json]
-   [common.components.container :as container]
-   [common.db :refer [update-route!]]
    [datascript.core :refer [create-conn transact!]]
    [datascript.transit :refer [write-transit-str]]
    [hiccup.page :refer [html5 include-css include-js]]
+   [org.project.app.config :refer [routes]]
+   [org.project.app.components.root :as root]
+   [org.project.common.components.container :as container]
+   [org.project.common.db :refer [update-route!]]
    [ring.middleware.resource :refer [wrap-resource]]
    [rum.core :refer [render-html]]))
 

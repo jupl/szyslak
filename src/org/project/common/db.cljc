@@ -1,4 +1,4 @@
-(ns common.db
+(ns org.project.common.db
   "DataScript functionality relative to project."
   (:require
    [datascript.core :refer [transact!]]))

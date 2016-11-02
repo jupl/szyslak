@@ -46,22 +46,24 @@
   "target")
 
 ;; Define default task options used across the board.
-(task-options! aot {:namespace '#{app.main}}
-               jar {:main 'app.main}
+(task-options! aot {:namespace '#{org.project.app.main}}
+               jar {:main 'org.project.app.main}
                pom {:project 'app
                     :version "0.1.0"}
-               reload {:on-jsload 'common.reload/handle
+               reload {:on-jsload 'org.project.common.reload/handle
                        :asset-path "public"}
-               serve {:handler 'app.handler/dev-handler}
+               serve {:handler 'org.project.app.handler/dev-handler}
                target {:dir #{target-path}}
                test-cljs {:exit? true :js-env :phantom})
 
 (deftask build
   "Produce a production build with optimizations."
   []
-  (let [prod-closure-opts (assoc-in closure-opts
-                                    [:closure-defines 'common.config/production]
-                                    true)]
+  (let [prod-closure-opts
+        (assoc-in
+         closure-opts
+         [:closure-defines 'org.project.common.config/production]
+         true)]
     (comp
      (sift :include #{#"^public/devcards"} :invert true)
      (cljs :optimizations :advanced
@@ -79,9 +81,11 @@
   "Start server locally with dev tools and live updates."
   [d devcards  bool "Include devcards in build."
    p port PORT int  "The port number to start the server in."]
-  (let [dev-closure-opts (assoc-in closure-opts
-                                   [:closure-defines 'common.config/hot-reload]
-                                   true)
+  (let [dev-closure-opts
+        (assoc-in
+         closure-opts
+         [:closure-defines 'org.project.common.config/hot-reload]
+         true)
         tasks [(serve :port port)
                (sift :include #{#"\.clj$"} :invert true)
                (watch)

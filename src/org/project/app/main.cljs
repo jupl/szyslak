@@ -1,16 +1,16 @@
-(ns app.main
+(ns org.project.app.main
   "Entry point for application."
   (:require
-   [app.components.root :as root]
-   [app.config :refer [routes]]
    [bidi.bidi :refer [match-route]]
-   [common.components.container :as container]
-   [common.config :refer-macros [when-production]]
-   [common.db :refer [update-route!]]
-   [common.messenger :refer [create-messenger dispatch]]
-   [common.reload :as reload]
    [datascript.core :refer [conn-from-db transact!]]
    [datascript.transit :refer [read-transit-str]]
+   [org.project.app.components.root :as root]
+   [org.project.app.config :refer [routes]]
+   [org.project.common.components.container :as container]
+   [org.project.common.config :refer-macros [when-production]]
+   [org.project.common.db :refer [update-route!]]
+   [org.project.common.messenger :refer [create-messenger dispatch]]
+   [org.project.common.reload :as reload]
    [pushy.core :as pushy]
    [rum.core :as rum]))
 

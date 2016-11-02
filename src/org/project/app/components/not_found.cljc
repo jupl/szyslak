@@ -1,4 +1,4 @@
-(ns app.components.not-found
+(ns org.project.app.components.not-found
   "404 component structure."
   (:require
    [rum.core :as rum]))
