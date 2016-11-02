@@ -6,6 +6,7 @@
    [bidi.bidi :refer [match-route]]
    [common.components.container :as container]
    [common.config :refer-macros [when-production]]
+   [common.db :refer [update-route!]]
    [common.messenger :refer [create-messenger dispatch]]
    [common.reload :as reload]
    [datascript.core :refer [conn-from-db transact!]]
@@ -28,14 +29,6 @@
                :component root/component}]
     (rum/mount (container/component props) container)))
 
-(defn- update-route
-  "Update DataScript with new routing information."
-  [{:keys [handler route-params]}]
-  (println handler)
-  (transact! connection
-             [{:db/id 0 :app.router/handler handler}
-              {:db/id 0 :app.router/route-params (or route-params {})}]))
-
 (defn- -main
   "Application entry point."
   []
@@ -45,7 +38,9 @@
     (reload/add-handler render))
 
   ;; Set up routing
-  (let [history (pushy/pushy update-route (partial match-route routes))]
+  (let [on-route-change (partial update-route! connection)
+        matcher (partial match-route routes)
+        history (pushy/pushy on-route-change matcher)]
     (pushy/start! history))
 
   ;; Register handlers to messenger

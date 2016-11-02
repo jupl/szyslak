@@ -1,25 +1,30 @@
 (ns app.components.root
   "Application root component structure."
   (:require
+   [app.components.home :as home]
+   [app.components.not-found :as not-found]
+   [common.db :refer [route-query]]
+   [common.components.container :as container]
+   [datascript.core :refer [q]]
    [rum.core :as rum]))
-
-(def page-style
-  "Application root styling."
-  {:flex 1
-   :display "flex"
-   :justifyContent "center"
-   :alignItems "center"
-   :background "linear-gradient(transparent, gainsboro)"})
 
 ;; --------- Template
 
 (rum/defc template
   "Application root template."
-  []
-  [:div {:style page-style} "Hello, World"])
+  [{:keys [handler]}]
+  (case handler
+    :home (home/component)
+    :not-found (not-found/component)))
 
 ;; --------- Component
 
-(def component
+(rum/defcc component
   "Application root component."
-  template)
+  < rum/reactive container/mixin
+  [comp]
+  ;; TODO Fix server side rendering issue
+  (let [db (-> comp container/get-context :connection rum/react)
+        [handler] #?(:cljs (q route-query db)
+                     :clj [:home])]
+    (template {:handler handler})))

@@ -6,6 +6,7 @@
    [bidi.ring :refer [make-handler]]
    [clojure.data.json :as json]
    [common.components.container :as container]
+   [common.db :refer [update-route!]]
    [datascript.core :refer [create-conn transact!]]
    [datascript.transit :refer [write-transit-str]]
    [hiccup.page :refer [html5 include-css include-js]]
@@ -35,14 +36,13 @@
   [handler]
   (fn request-handler
     [{:keys [route-params]}]
-    (let [connection (create-conn)]
-      (transact! connection
-                 [{:db/id 0 :app.router/handler handler}
-                  {:db/id 0 :app.router/route-params (or route-params {})}])
+    (let [connection (create-conn)
+          route {:handler handler :route-params route-params}
+          props {:connection connection :component root/component}]
+      (update-route! connection route)
       {:status 200
        :headers {"Content-Type" "text/html"}
-       :body (home-page {:connection connection
-                         :component root/component})})))
+       :body (home-page props)})))
 
 (def handler
   "Finalized application Ring handler."

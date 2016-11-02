@@ -19,7 +19,7 @@
 
 (def mixin
   "Child item mixin."
-  {:class-properties {:contextTypes context-types}})
+  #?(:cljs {:class-properties {:contextTypes context-types}}))
 
 (defn get-context
   "Extract context from component."
