@@ -1,4 +1,4 @@
-(ns app.components.root
+(ns org.project.app.components.root
   "Application root component structure."
   (:require
    [rum.core :as rum]))

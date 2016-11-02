@@ -1,4 +1,4 @@
-(ns common.reload
+(ns org.project.common.reload
   "Logic for reload notification if hot reloading is available.")
 
 ;; Set of handlers called when a hot reload occurs in a dev environment.

@@ -1,8 +1,8 @@
-(ns electron.menu
+(ns org.project.electron.menu
   "ClojureScript API for Electron menu."
   (:require
-   [common.config :as config]
-   [electron.window :refer [init-window]]))
+   [org.project.common.config :as config]
+   [org.project.electron.window :refer [init-window]]))
 
 (def menu-template
   "Template to render menu in Electron."

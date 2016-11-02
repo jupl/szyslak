@@ -1,9 +1,9 @@
-(ns electron.main
+(ns org.project.electron.main
   "Entry point for the main process."
   (:require
-   [common.config :refer-macros [when-production]]
-   [electron.menu :refer [init-menu]]
-   [electron.window :refer [init-window]]))
+   [org.project.common.config :refer-macros [when-production]]
+   [org.project.electron.menu :refer [init-menu]]
+   [org.project.electron.window :refer [init-window]]))
 
 (defn- -main
   "Configure and bootstrap Electron application."
