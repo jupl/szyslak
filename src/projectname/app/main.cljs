@@ -1,12 +1,12 @@
-(ns org.project.app.main
+(ns projectname.app.main
   "Entry point for application."
   (:require
    [datascript.core :refer [create-conn]]
-   [org.project.app.components.root :as root]
-   [org.project.common.components.container :as container]
-   [org.project.common.config :refer-macros [when-production]]
-   [org.project.common.messenger :refer [create-messenger dispatch]]
-   [org.project.common.reload :as reload]
+   [projectname.app.components.root :as root]
+   [projectname.common.components.container :as container]
+   [projectname.common.config :refer-macros [when-production]]
+   [projectname.common.messenger :refer [create-messenger dispatch]]
+   [projectname.common.reload :as reload]
    [rum.core :as rum]))
 
 (def schema

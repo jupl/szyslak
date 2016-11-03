@@ -1,4 +1,4 @@
-(ns org.project.common.components.container
+(ns projectname.common.components.container
   "Container component structure."
   (:require
    [rum.core :as rum]))
