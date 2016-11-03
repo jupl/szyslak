@@ -1,8 +1,7 @@
 (ns org.project.color.components.page
   "Color page component structure."
   (:require
-   [datascript.core :refer [q]]
-   [org.project.color.db :refer [color-query]]
+   [org.project.color.db :refer [query-color]]
    [org.project.common.components.container :as container]
    [rum.core :as rum]))
 
@@ -51,8 +50,10 @@
   < rum/reactive container/mixin
   [comp {:keys [style]}]
   (let [{:keys [connection dispatch]} (container/get-context comp)
-        db (rum/react connection)]
+        color (-> connection rum/react query-color)
+        on-next-color #(dispatch :org.project.color.messenger/next)
+        on-previous-color #(dispatch :org.project.color.messenger/previous)]
     (template {:style style
-               :color (q color-query db)
-               :on-next-color #(dispatch :color.messenger/next)
-               :on-previous-color #(dispatch :color.messenger/previous)})))
+               :color color
+               :on-next-color on-next-color
+               :on-previous-color on-previous-color})))

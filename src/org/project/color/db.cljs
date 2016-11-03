@@ -5,54 +5,54 @@
 
 ;; --------- Queries
 
-(def color-query
+(def query-color
   "DataScript query to get selected color."
-  '[:find ?color .
-    :where
-    [0 ::selected ?id]
-    [?id ::value ?color]])
+  (partial q '[:find ?color .
+               :where
+               [0 ::selected ?id]
+               [?id ::value ?color]]))
 
-(def color-ids-query
+(def query-color-ids
   "DataScript query to get all IDs for colors."
-  '[:find [?id ...]
-    :where [?id ::value]])
+  (partial q '[:find [?id ...]
+               :where [?id ::value]]))
 
-(def previous-color-ids-query
+(def query-previous-color-ids
   "DataScript query to get all IDs that precede selected color."
-  '[:find [?id ...]
-    :where
-    [0 ::selected ?selected]
-    [?id ::value]
-    [(< ?id ?selected)]])
+  (partial q '[:find [?id ...]
+               :where
+               [0 ::selected ?selected]
+               [?id ::value]
+               [(< ?id ?selected)]]))
 
-(def next-color-ids-query
+(def query-next-color-ids
   "DataScript query to get all IDs that follow selected color."
-  '[:find [?id ...]
-    :where
-    [0 ::selected ?selected]
-    [?id ::value]
-    [(> ?id ?selected)]])
+  (partial q '[:find [?id ...]
+               :where
+               [0 ::selected ?selected]
+               [?id ::value]
+               [(> ?id ?selected)]]))
 
 ;; --------- Transactions
 
-(defn previous-color
+(defn previous-color!
   "Cycle to the previous color from selected color."
   [connection]
-  (let [id (or (->> @connection (q previous-color-ids-query) last)
-               (->> @connection (q color-ids-query) last))]
+  (let [id (or (-> @connection query-previous-color-ids last)
+               (-> @connection query-color-ids last))]
     (transact! connection [{:db/id 0 ::selected id}] ::tx-previous)))
 
-(defn next-color
+(defn next-color!
   "Cycle to the next color from selected color."
   [connection]
-  (let [id (or (->> @connection (q next-color-ids-query) first)
-               (->> @connection (q color-ids-query) first))]
+  (let [id (or (-> @connection query-next-color-ids first)
+               (-> @connection query-color-ids first))]
     (transact! connection [{:db/id 0 ::selected id}] ::tx-next)))
 
-(defn initialize
+(defn initialize!
   "Set up colors and selected color."
   [connection]
   (let [colors ["#39cccc" "#2ecc40" "#ffdc00" "#ff851b"]
         transactions (map #(hash-map ::value %) colors)]
     (transact! connection transactions ::tx-initialize))
-  (next-color connection))
+  (next-color! connection))

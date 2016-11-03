@@ -3,7 +3,8 @@
   (:require
    [datascript.core :refer [create-conn]]
    [org.project.app.components.root :as root]
-   [org.project.color.messenger :as color]
+   [org.project.color.db :as color-db]
+   [org.project.color.messenger :as color-msg]
    [org.project.common.components.container :as container]
    [org.project.common.config :refer-macros [when-production]]
    [org.project.common.messenger :refer [create-messenger dispatch]]
@@ -52,8 +53,11 @@
     (enable-console-print!)
     (reload/add-handler render))
 
+  ;; Database initializers
+  (color-db/initialize! connection)
+
   ;; Register handlers to messenger
-  (color/register messenger connection)
+  (color-msg/register messenger connection)
 
   ;; Start application
   (dispatch messenger :initialize)

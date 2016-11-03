@@ -13,7 +13,7 @@
   (let [[handler] (subscribe messenger ::previous)]
     (go-loop []
       (<! handler)
-      (db/previous-color connection)
+      (db/previous-color! connection)
       (recur))))
 
 (defn register-next
@@ -22,7 +22,7 @@
   (let [[handler] (subscribe messenger ::next)]
     (go-loop []
       (<! handler)
-      (db/next-color connection)
+      (db/next-color! connection)
       (recur))))
 
 (defn register-auto
@@ -33,7 +33,7 @@
     (go-loop []
       (if (nil? (-> [previous next (timeout 5000)] alts! (get 0)))
         (do
-          (db/next-color connection)
+          (db/next-color! connection)
           (recur))
         (do
           (unsubscribe-previous)
@@ -43,7 +43,6 @@
   "Hook up to messenger for color events."
   [messenger connection]
   (let [[handler unsubscribe] (subscribe messenger :initialize)]
-    (db/initialize connection)
     (go
       (<! handler)
       (doseq [func [register-previous register-next register-auto]]
