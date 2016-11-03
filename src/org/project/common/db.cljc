@@ -2,20 +2,20 @@
   "DataScript functionality relative to project."
   (:require
    [org.project.common.config :as config]
-   [datascript.core :refer [transact!]]))
+   [datascript.core :refer [q transact!]]))
 
-(def in-server-query
+(def query-in-server
   "DataScript query to check if in server environment."
-  '[:find ?in-server .
-    :where
-    [0 ::in-server ?in-server]])
+  (partial q '[:find ?in-server .
+               :where
+               [0 ::in-server ?in-server]]))
 
-(def route-query
+(def query-route
   "DataScript query to get handler."
-  '[:find [?handler ?route-params]
-    :where
-    [0 ::handler ?handler]
-    [0 ::route-params ?route-params]])
+  (partial q '[:find [?handler ?route-params]
+               :where
+               [0 ::handler ?handler]
+               [0 ::route-params ?route-params]]))
 
 (defn update-in-server!
   "Update routing information."
