@@ -1,9 +1,9 @@
-(ns org.project.color.messenger
+(ns projectname.color.messenger
   "Message handler for color specifics."
   (:require
    [cljs.core.async :refer [<! alts! timeout]]
-   [org.project.color.db :as db]
-   [org.project.common.messenger :refer [subscribe]])
+   [projectname.color.db :as db]
+   [projectname.common.messenger :refer [subscribe]])
   (:require-macros
    [cljs.core.async.macros :refer [go go-loop]]))
 

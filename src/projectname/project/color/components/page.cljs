@@ -1,8 +1,8 @@
-(ns org.project.color.components.page
+(ns projectname.color.components.page
   "Color page component structure."
   (:require
-   [org.project.color.db :refer [query-color]]
-   [org.project.common.components.container :as container]
+   [projectname.color.db :refer [query-color]]
+   [projectname.common.components.container :as container]
    [rum.core :as rum]))
 
 (def background-style
@@ -51,8 +51,8 @@
   [comp {:keys [style]}]
   (let [{:keys [connection dispatch]} (container/get-context comp)
         color (-> connection rum/react query-color)
-        on-next-color #(dispatch :org.project.color.messenger/next)
-        on-previous-color #(dispatch :org.project.color.messenger/previous)]
+        on-next-color #(dispatch :projectname.color.messenger/next)
+        on-previous-color #(dispatch :projectname.color.messenger/previous)]
     (template {:style style
                :color color
                :on-next-color on-next-color

@@ -1,7 +1,7 @@
-(ns org.project.app.components.root
+(ns projectname.app.components.root
   "Application root component structure."
   (:require
-   [org.project.color.components.page :as color-page]
+   [projectname.color.components.page :as color-page]
    [rum.core :as rum]))
 
 (def page-style

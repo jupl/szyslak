@@ -1,4 +1,4 @@
-(ns org.project.color.db
+(ns projectname.color.db
   "DataScript functionality relative to colors."
   (:require
    [datascript.core :refer [q transact!]]))
