@@ -45,13 +45,13 @@
   "target")
 
 ;; Define default task options used across the board.
-(task-options! aot {:namespace '#{org.project.app.main}}
-               jar {:main 'org.project.app.main}
+(task-options! aot {:namespace '#{projectname.app.main}}
+               jar {:main 'projectname.app.main}
                pom {:project 'app
                     :version "0.1.0"}
-               reload {:on-jsload 'org.project.common.reload/handle
+               reload {:on-jsload 'projectname.common.reload/handle
                        :asset-path "public"}
-               serve {:handler 'org.project.app.handler/dev-handler}
+               serve {:handler 'projectname.app.handler/dev-handler}
                target {:dir #{target-path}}
                test-cljs {:exit? true :js-env :phantom})
 
@@ -61,7 +61,7 @@
   (let [prod-closure-opts
         (assoc-in
          closure-opts
-         [:closure-defines 'org.project.common.config/production]
+         [:closure-defines 'projectname.common.config/production]
          true)]
     (comp
      (sift :include #{#"^public/devcards"} :invert true)
@@ -83,7 +83,7 @@
   (let [dev-closure-opts
         (assoc-in
          closure-opts
-         [:closure-defines 'org.project.common.config/hot-reload]
+         [:closure-defines 'projectname.common.config/hot-reload]
          true)
         tasks [(serve :port port)
                (sift :include #{#"\.clj$"} :invert true)

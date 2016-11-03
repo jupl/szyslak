@@ -1,4 +1,4 @@
-(ns org.project.app.config
+(ns projectname.app.config
   "Configuration used for this application.")
 
 (def routes

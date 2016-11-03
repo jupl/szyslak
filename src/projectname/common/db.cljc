@@ -1,8 +1,8 @@
-(ns org.project.common.db
+(ns projectname.common.db
   "DataScript functionality relative to project."
   (:require
-   [org.project.common.config :as config]
-   [datascript.core :refer [q transact!]]))
+   [datascript.core :refer [q transact!]]
+   [projectname.common.config :as config]))
 
 (def query-in-server
   "DataScript query to check if in server environment."

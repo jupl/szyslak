@@ -1,4 +1,4 @@
-(ns org.project.app.components.home
+(ns projectname.app.components.home
   "Home page component structure."
   (:require
    [rum.core :as rum]))

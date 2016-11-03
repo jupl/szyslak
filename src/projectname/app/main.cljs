@@ -1,16 +1,16 @@
-(ns org.project.app.main
+(ns projectname.app.main
   "Entry point for application."
   (:require
    [bidi.bidi :refer [match-route]]
    [cljs.reader :refer [read-string]]
    [datascript.core :refer [create-conn reset-conn! transact!]]
-   [org.project.app.components.root :as root]
-   [org.project.app.config :refer [routes]]
-   [org.project.common.components.container :as container]
-   [org.project.common.config :refer-macros [when-production]]
-   [org.project.common.db :refer [update-in-server! update-route!]]
-   [org.project.common.messenger :refer [create-messenger dispatch]]
-   [org.project.common.reload :as reload]
+   [projectname.app.components.root :as root]
+   [projectname.app.config :refer [routes]]
+   [projectname.common.components.container :as container]
+   [projectname.common.config :refer-macros [when-production]]
+   [projectname.common.db :refer [update-in-server! update-route!]]
+   [projectname.common.messenger :refer [create-messenger dispatch]]
+   [projectname.common.reload :as reload]
    [pushy.core :as pushy]
    [rum.core :as rum]))
 

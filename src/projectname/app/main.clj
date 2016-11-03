@@ -1,8 +1,8 @@
-(ns org.project.app.main
+(ns projectname.app.main
   "Entry point for main server-side application."
   (:require
    [immutant.web :as web]
-   [org.project.app.handler :refer [handler]]
+   [projectname.app.handler :refer [handler]]
    [ring.middleware.defaults :refer [api-defaults wrap-defaults]])
   (:gen-class))
 

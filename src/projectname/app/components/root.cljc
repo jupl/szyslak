@@ -1,10 +1,10 @@
-(ns org.project.app.components.root
+(ns projectname.app.components.root
   "Application root component structure."
   (:require
-   [org.project.app.components.home :as home]
-   [org.project.app.components.not-found :as not-found]
-   [org.project.common.db :refer [query-route]]
-   [org.project.common.components.container :as container]
+   [projectname.app.components.home :as home]
+   [projectname.app.components.not-found :as not-found]
+   [projectname.common.db :refer [query-route]]
+   [projectname.common.components.container :as container]
    [rum.core :as rum]))
 
 ;; --------- Template
