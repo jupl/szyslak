@@ -1,9 +1,7 @@
 (ns org.project.common.messenger
   "Simple pubsub messaging system with helpers."
   (:require
-   [cljs.core.async :refer [chan pub put! sub unsub]])
-  (:require-macros
-   [cljs.core.async.macros :refer [go]]))
+   [cljs.core.async :refer [chan pub put! sub unsub]]))
 
 (defprotocol IMessenger
   "Interface for messenger system."
