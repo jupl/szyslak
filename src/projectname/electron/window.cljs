@@ -1,7 +1,7 @@
-(ns org.project.electron.window
+(ns projectname.electron.window
   "ClojureScript API for Electron browser windows."
   (:require
-   [org.project.common.config :as config]))
+   [projectname.common.config :as config]))
 
 (defn init-window
   "Create a new window (if it doesn't exist already) and focus."

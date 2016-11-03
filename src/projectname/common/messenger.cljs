@@ -1,4 +1,4 @@
-(ns org.project.common.messenger
+(ns projectname.common.messenger
   "Simple pubsub messaging system with helpers."
   (:require
    [cljs.core.async :refer [chan pub put! sub unsub]]))
