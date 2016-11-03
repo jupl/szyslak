@@ -2,7 +2,7 @@
   "Entry point for application."
   (:require
    [bidi.bidi :refer [match-route]]
-   [datascript.core :refer [conn-from-db transact!]]
+   [datascript.core :refer [reset-conn! transact!]]
    [datascript.transit :refer [read-transit-str]]
    [org.project.app.components.root :as root]
    [org.project.app.config :refer [routes]]
@@ -15,7 +15,7 @@
    [rum.core :as rum]))
 
 ;; DataScript instance
-(defonce connection (conn-from-db (read-transit-str js/__DB__)))
+(defonce connection (create-conn))
 
 ;; Messenger instance
 (defonce messenger (create-messenger))
@@ -32,6 +32,9 @@
 (defn- -main
   "Application entry point."
   []
+  ;; Initialize DB with data from server
+  (reset-conn! connection (read-transit-str js/__DB__))
+
   ;; Setup development tools
   (when-production false
     (enable-console-print!)
