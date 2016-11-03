@@ -2,7 +2,7 @@
   "Entry point for application."
   (:require
    [bidi.bidi :refer [match-route]]
-   [datascript.core :refer [reset-conn! transact!]]
+   [datascript.core :refer [create-conn reset-conn! transact!]]
    [datascript.transit :refer [read-transit-str]]
    [org.project.app.components.root :as root]
    [org.project.app.config :refer [routes]]
