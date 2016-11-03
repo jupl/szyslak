@@ -51,12 +51,15 @@
       (make-handler bidi-handler)
       (wrap-resource "public")))
 
+(def create-dev-handler
+  "Create a development handler using above handler."
+  (memoize #(do (require '[ring.middleware.reload]
+                         '[ring.middleware.stacktrace])
+                (-> #'handler
+                    ((resolve 'ring.middleware.reload/wrap-reload))
+                    ((resolve 'ring.middleware.stacktrace/wrap-stacktrace))))))
+
 (defn- dev-handler
   "Application Ring handler with wrappers for development server."
   [& args]
-  (require '[ring.middleware.reload]
-           '[ring.middleware.stacktrace])
-  (defonce wrap-reload (resolve 'ring.middleware.reload/wrap-reload))
-  (defonce wrap-stacktrace (resolve 'ring.middleware.stacktrace/wrap-stacktrace))
-  (defonce final-handler (-> #'handler wrap-reload wrap-stacktrace))
-  (apply final-handler args))
+  (apply (create-dev-handler) args))
