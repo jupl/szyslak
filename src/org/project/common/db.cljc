@@ -20,11 +20,14 @@
 (defn update-in-server!
   "Update routing information."
   [connection]
-  (transact! connection [{:db/id 0 ::in-server config/in-server}]))
+  (transact! connection
+             [{:db/id 0 ::in-server config/in-server}]
+             ::tx-in-server))
 
 (defn update-route!
   "Update routing information."
   [connection {:keys [handler route-params]}]
   (transact! connection
              [{:db/id 0 ::handler handler}
-              {:db/id 0 ::route-params (or route-params {})}]))
+              {:db/id 0 ::route-params (or route-params {})}]
+             ::tx-route))
