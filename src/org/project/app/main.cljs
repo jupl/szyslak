@@ -2,8 +2,8 @@
   "Entry point for application."
   (:require
    [bidi.bidi :refer [match-route]]
+   [cljs.reader :refer [read-string]]
    [datascript.core :refer [create-conn reset-conn! transact!]]
-   [datascript.transit :refer [read-transit-str]]
    [org.project.app.components.root :as root]
    [org.project.app.config :refer [routes]]
    [org.project.common.components.container :as container]
@@ -33,7 +33,7 @@
   "Application entry point."
   []
   ;; Initialize DB with data from server
-  (reset-conn! connection (read-transit-str js/__DB__))
+  (reset-conn! connection (read-string js/__DB__))
 
   ;; Setup development tools
   (when-production false

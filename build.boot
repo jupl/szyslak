@@ -17,7 +17,6 @@
                  [rum                           "0.10.7"    :only [server-render]]
                  [bidi                          "2.0.13"]
                  [datascript                    "0.15.4"]
-                 [datascript-transit            "0.2.2"]
                  [hiccup                        "1.0.5"]
                  [org.clojure/clojure           "1.8.0"]
                  [org.clojure/data.json         "0.2.6"]

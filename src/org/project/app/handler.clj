@@ -4,7 +4,6 @@
    [bidi.ring :refer [make-handler]]
    [clojure.data.json :as json]
    [datascript.core :refer [create-conn transact!]]
-   [datascript.transit :refer [write-transit-str]]
    [hiccup.page :refer [html5 include-css include-js]]
    [org.project.app.config :refer [routes]]
    [org.project.app.components.root :as root]
@@ -28,7 +27,7 @@
       [:div#container {:style "min-height:100vh;display:flex"}
        (render-html (container/component props))]
       [:script {:type "text/javascript"}
-       "window.__DB__=" (json/write-str (write-transit-str @connection)) ";"]
+       "window.__DB__=" (json/write-str (pr-str @connection)) ";"]
       (include-js "/app.js")])))
 
 (defn- bidi-handler
