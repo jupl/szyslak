@@ -40,7 +40,7 @@
         props {:connection connection
                :dispatch (partial dispatch messenger)
                :component root/component}]
-    (set! (.-cssText container) "")
+    (.removeAttribute container "style")
     (doseq [[key val] container-style]
       (aset style (clj->js key) (clj->js val)))
     (rum/mount (container/component props) container)))
