@@ -30,7 +30,7 @@ This is a boilerplate project for developing desktop applications with [[http://
 1. Follow the [[https://github.com/boot-clj/boot#install][instructions for installing Boot]]
 2. Follow the [[https://github.com/electron-userland/electron-prebuilt#installation][instructions for installing electron-prebuilt]]
 3. Clone/download this repository
-4. Start running tasks as described below in the [tasks section](#tasks).
+4. Start running tasks as described below in the [[#tasks][tasks section]]
 
 ^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}
 
