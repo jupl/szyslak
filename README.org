@@ -1,0 +1,4 @@
+Example project
+
+[[https://travis-ci.org/jupl/szyslak][file:http://img.shields.io/travis/jupl/szyslak/example.svg?label=travis]]
+[[https://jarkeeper.com/jupl/szyslak][file:https://jarkeeper.com/jupl/szyslak/status.svg]]
