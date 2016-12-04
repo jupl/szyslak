@@ -1,17 +1,17 @@
 (set-env!
  :source-paths #{"src"}
  :resource-paths #{"resources"}
- :dependencies '[[adzerk/boot-cljs              "1.7.228-1" :scope "test"]
+ :dependencies '[[adzerk/boot-cljs              "1.7.228-2" :scope "test"]
                  [adzerk/boot-reload            "0.4.13"    :scope "test"]
-                 [binaryage/devtools            "0.8.2"     :scope "test"]
-                 [binaryage/dirac               "0.7.4"     :scope "test"]
-                 [crisptrutski/boot-cljs-test   "0.2.1"     :scope "test"]
-                 [datascript                    "0.15.4"    :scope "test"]
+                 [binaryage/devtools            "0.8.3"     :scope "test"]
+                 [binaryage/dirac               "0.8.4"     :scope "test"]
+                 [crisptrutski/boot-cljs-test   "0.3.0"     :scope "test"]
+                 [datascript                    "0.15.5"    :scope "test"]
                  [devcards                      "0.2.2"     :scope "test" :exclusions [cljsjs/react cljsjs/react-dom]]
                  [org.clojure/clojure           "1.8.0"     :scope "test"]
                  [org.clojure/clojurescript     "1.9.293"   :scope "test"]
                  [org.clojure/core.async        "0.2.395"   :scope "test"]
-                 [pandeiro/boot-http            "0.7.3"     :scope "test"]
+                 [pandeiro/boot-http            "0.7.6"     :scope "test"]
                  [powerlaces/boot-cljs-devtools "0.1.2"     :scope "test"]
                  [rum                           "0.10.7"    :scope "test"]
                  [tolitius/boot-check           "0.1.3"     :scope "test"]])
