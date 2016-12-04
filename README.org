@@ -1,6 +1,6 @@
 #+HTML: <h1>Szyslak <sub><sub><sub>ClojureScript + Rum + DataScript</sub></sub></sub></h1>
-[[https://travis-ci.org/jupl/closcri][file:http://img.shields.io/travis/jupl/szyslak.svg?label=travis]]
-[[https://jarkeeper.com/jupl/closcri][file:https://jarkeeper.com/jupl/szyslak/status.svg]]
+[[https://travis-ci.org/jupl/szyslak][file:http://img.shields.io/travis/jupl/szyslak.svg?label=travis]]
+[[https://jarkeeper.com/jupl/szyslak][file:https://jarkeeper.com/jupl/szyslak/status.svg]]
 
 ** Table of Contents
 - [[#about][About]]
@@ -11,12 +11,13 @@
 - [[#project-resources][Project Resources]]
 
 ** About
-This is a boilerplate project for developing client-side code using [[https://clojurescript.org/][ClojureScript]]. For an example project, visit the [[https://github.com/jupl/closcri/tree/example][example]] branch. Flavors:
+This is a boilerplate project for developing client-side code using [[https://clojurescript.org/][ClojureScript]], [[https://github.com/tonsky/datascript][DataScript]], and [[https://github.com/tonsky/rum][Rum]]. For an example project, visit the [[https://github.com/jupl/szyslak/tree/example][example]] branch. Flavors:
 - [[https://github.com/jupl/szyslak/tree/master][Szyslak]]
-- [[https://github.com/jupl/closcri/tree/electron][Szyslak with Electron]]
-- [[https://github.com/jupl/closcri/tree/server][Szyslak with Clojure Server]]
+- [[https://github.com/jupl/szyslak/tree/electron][Szyslak with Electron]]
+- [[https://github.com/jupl/szyslak/tree/server][Szyslak with Clojure Server]]
 
-^{[[#closcri-clojurescript-boilerplate][Back to top]]}
+^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}
+
 ** Prerequisites
 - JDK 1.7+
   - [[http://openjdk.java.net/install/index.html][OpenJDK]]
@@ -30,12 +31,12 @@ This is a boilerplate project for developing client-side code using [[https://cl
 2. Clone/download this repository
 3. Start running tasks as described below in the [tasks section](#tasks).
 
-^{[[#closcri-clojurescript-boilerplate][Back to top]]}
+^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}
 
 ** Project structure
 *** Overview
 #+BEGIN_EXAMPLE
-closcri/
+szyslak/
 ├─ resources/           # Files to be included in build
 │  ├─ assets/           # Static files
 │  ├─ app.cljs.edn      # Application entry point
@@ -61,7 +62,7 @@ closcri/
 *** Entry Points
 When JavaScript code is built, entry points are defined by the =.cljs.edn= file inside the =resources/= directory. The entry point files reference namespaces and functions in the =src/= directory.
 
-^{[[#closcri-clojurescript-boilerplate][Back to top]]}
+^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}
 
 ** Tasks
 Tasks can be executed in the following manner:
