@@ -29,7 +29,7 @@ This is a boilerplate project for developing client-side code using [[https://cl
 ** Getting Started
 1. Follow the [[https://github.com/boot-clj/boot#install][instructions for installing Boot]]
 2. Clone/download this repository
-3. Start running tasks as described below in the [tasks section](#tasks).
+3. Start running tasks as described below in the [[#tasks][tasks section]]
 
 ^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}
 
