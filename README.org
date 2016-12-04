@@ -1,0 +1,117 @@
+#+HTML: <h1>Szyslak <sub><sub><sub>ClojureScript + Rum + DataScript</sub></sub></sub></h1>
+[[https://travis-ci.org/jupl/szyslak][file:http://img.shields.io/travis/jupl/szyslak/server.svg?label=travis]]
+[[https://jarkeeper.com/jupl/szyslak][file:https://jarkeeper.com/jupl/szyslak/status.svg]]
+
+** Table of Contents
+- [[#about][About]]
+- [[#prerequisites][Prerequisites]]
+- [[#getting-started][Getting Started]]
+- [[#project-structure][Project Structure]]
+- [[#tasks][Tasks]]
+- [[#project-resources][Project Resources]]
+
+** About
+This is a boilerplate project for developing a server application using [[http://clojure.org/][Clojure]], [[https://clojurescript.org/][ClojureScript]], [[https://github.com/tonsky/datascript][DataScript]], and [[https://github.com/tonsky/rum][Rum]]. For an example project, visit the [[https://github.com/jupl/szyslak/tree/example][example]] branch. Flavors:
+- [[https://github.com/jupl/szyslak/tree/master][Szyslak]]
+- [[https://github.com/jupl/szyslak/tree/electron][Szyslak with Electron]]
+- [[https://github.com/jupl/szyslak/tree/server][Szyslak with Clojure Server]]
+
+^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}
+
+** Prerequisites
+- JDK 1.7+
+  - [[http://openjdk.java.net/install/index.html][OpenJDK]]
+  - [[http://www.oracle.com/technetwork/java/javase/downloads/index.html][Oracle]]
+- [[http://boot-clj.com/][Boot]]
+
+^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}
+
+** Getting Started
+1. Follow the [[https://github.com/boot-clj/boot#install][instructions for installing Boot]]
+2. Clone/download this repository
+3. Start running tasks as described below in the [tasks section](#tasks).
+
+^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}
+
+** Project structure
+*** Overview
+#+BEGIN_EXAMPLE
+szyslak/
+├─ resources/           # Files to be included in build
+│  └─ public/              # Public files served
+│     ├─ assets/           # Static files
+│     ├─ app.cljs.edn      # Application entry point
+│     ├─ devcards.cljs.edn # Devcards entry point
+│     ├─ devcards.html     # HTML to present Devcards
+│     └─ favicon.ico       # Obligatory favicon
+├─ src/
+│  └─ projectname/            # Project namespace
+│     ├─ app/                 # Application namespace
+│     │  ├─ components/       # Application components
+│     │  │  ├─ home.cljc      # Home page
+│     │  │  ├─ not_found.cljc # 404 page
+│     │  │  └─ root.cljc      # Top level application view
+│     │  ├─ config.cljc       # Configuration data/functions
+│     │  ├─ handler.clj       # Ring handler for server application
+│     │  ├─ main.clj          # Server application entry point
+│     │  └─ main.cljs         # Client application entry point
+│     └─ common/              # Shared code namespace
+│        ├─ components/       # General components
+│        │  └─ container.cljc # Container for top level components
+│        ├─ config.cljc       # Configuration data/functions
+│        ├─ db.cljs           # General db helpers
+│        ├─ devcards.cljs     # Devcards entry point
+│        ├─ messenger.cljs    # Helpers for basic messenger system
+│        └─ reload.cljs       # Helpers for hot reload
+├─ boot.properties # Boot properties
+└─ build.boot      # Tasks and dependencies for propect
+#+END_EXAMPLE
+*** Entry Points
+When JavaScript code is built, entry points are defined by the =.cljs.edn= file inside the =resources/= directory. The entry point files reference namespaces and functions in the =src/= directory.
+
+^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}
+
+** Tasks
+Tasks can be executed in the following manner:
+#+BEGIN_EXAMPLE
+boot [command]
+#+END_EXAMPLE
+Examples:
+#+BEGIN_EXAMPLE
+boot dev -s -p 8000
+boot build
+#+END_EXAMPLE
+*** =boot dev [-d] [-p PORT]=
+Create a development build with source maps and serve on a local server with live updates and a REPL.
+- If you want to include Devcards, use the =-d= option.
+- The =-p= option is also available to specify the port number.
+*** =boot build=
+Create a production build with optimizations.
+*** =boot devcards=
+Create a standalone build of devcards only.
+*** =boot test=
+Run all CLJS tests once. If tests are defined with devcards, those are included.
+*** =boot watch test=
+Run all CLJS tests once and run again on file changes. If tests are defined with devcards, those are included.
+*** =boot lint=
+Check and analyze source code.
+
+^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}
+
+** Project Resources
+- Language
+  - [[http://clojure.org/][Clojure]]
+  - [[https://clojurescript.org][ClojureScript]]
+- Libraries
+  - [[https://github.com/clojure/core.async][core.async]]
+  - [[https://github.com/tonsky/datascript][DataScript]]
+  - [[http://immutant.org/][Immutant]]
+  - [[https://github.com/ring-clojure/ring][Ring]]
+  - [[https://github.com/tonsky/rum][Rum]]
+- Development Tools
+  - [[https://github.com/bhauman/devcards][Devcards]]
+  - [[https://github.com/boot-clj/boot-cljs-devtools][Boot CLJS DevTools]]
+- Build Tools
+  - [[https://github.com/boot-clj/boot][Boot]]
+
+^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}

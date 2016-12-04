@@ -18,7 +18,7 @@
                [0 ::route-params ?route-params]]))
 
 (defn update-in-server!
-  "Update routing information."
+  "Update in server flag."
   [connection]
   (transact! connection
              [{:db/id 0 ::in-server config/in-server}]
