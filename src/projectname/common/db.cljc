@@ -4,6 +4,8 @@
    [datascript.core :refer [q transact!]]
    [projectname.common.config :as config]))
 
+;; --------- Queries
+
 (def query-in-server
   "DataScript query to check if in server environment."
   (partial q '[:find ?in-server .
@@ -16,6 +18,8 @@
                :where
                [0 ::handler ?handler]
                [0 ::route-params ?route-params]]))
+
+;; --------- Transactions
 
 (defn update-in-server!
   "Update in server flag."
