@@ -51,6 +51,11 @@
          true)]
     (comp
      (sift :include #{#"^devcards"} :invert true)
+     (cljs :ids #{"index"}
+           :optimizations :simple
+           :compiler-options (merge prod-closure-opts {:optimize-constants true
+                                                       :static-fns true}))
+     (sift :include #{#"^index\.cljs\.edn$"} :invert true)
      (cljs :optimizations :advanced
            :compiler-options prod-closure-opts)
      (sift :include #{#"\.out" #"\.cljs\.edn$" #"^\." #"/\."} :invert true)
