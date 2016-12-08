@@ -2,7 +2,7 @@
   "DataScript functionality relative to project."
   (:require
    [datascript.core :refer [q transact!]]
-   [projectname.common.config :as config]))
+   [projectname.common.config :refer-macros [in-server?]]))
 
 ;; --------- Queries
 
@@ -25,7 +25,7 @@
   "Update in server flag."
   [connection]
   (transact! connection
-             [{:db/id 0 ::in-server config/in-server}]
+             [{:db/id 0 ::in-server (in-server?)}]
              ::tx-in-server))
 
 (defn update-route!

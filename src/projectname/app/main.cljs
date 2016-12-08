@@ -7,7 +7,7 @@
    [projectname.app.components.root :as root]
    [projectname.app.config :refer [routes]]
    [projectname.common.components.container :as container]
-   [projectname.common.config :refer-macros [when-production]]
+   [projectname.common.config :refer-macros [production?]]
    [projectname.common.db :refer [update-in-server! update-route!]]
    [projectname.common.messenger :refer [create-messenger dispatch]]
    [projectname.common.reload :as reload]
@@ -36,7 +36,7 @@
   (reset-conn! connection (read-string js/__DB__))
 
   ;; Setup development tools
-  (when-production false
+  (when-not (production?)
     (enable-console-print!)
     (reload/add-handler render))
 

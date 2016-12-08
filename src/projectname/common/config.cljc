@@ -11,20 +11,14 @@
   "If true then code is in a server environment."
   #?(:cljs false :clj true))
 
-(defmacro when-production
-  "Helper for evaluating code if (not) in production for tree shaking."
-  [flag & body]
-  `(when (identical? production ~flag)
-     ~@body))
+(defmacro production?
+  "Helper for evaluating code if in production for tree shaking."
+  [] `(identical? production true))
 
-(defmacro when-hot-reload
-  "Helper for evaluating code if there is (not) hot reload for tree shaking."
-  [flag & body]
-  `(when (identical? hot-reload ~flag)
-     ~@body))
+(defmacro hot-reload?
+  "Helper for evaluating code if in hot reload for tree shaking."
+  [] `(identical? hot-reload true))
 
-(defmacro when-in-server
-  "Helper for evaluating code if (not) in the server for tree shaking."
-  [flag & body]
-  `(when (identical? in-server ~flag)
-     ~@body))
+(defmacro in-server?
+  "Helper for evaluating code if in the server for tree shaking."
+  [] `(identical? in-server true))
