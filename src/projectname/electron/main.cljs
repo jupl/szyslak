@@ -14,8 +14,8 @@
   (let [app (-> "electron" js/require .-app)
         exit-app #(.quit app)
         main-window (atom nil)
-        osx (= js/process.platform "darwin")
-        open-main-window #(init-window main-window "app.html")]
+        open-main-window #(init-window main-window "app.html")
+        osx (= js/process.platform "darwin")]
     (.on app "ready" init-menu)
     (.on app "ready" open-main-window)
     (.on app "activate" open-main-window)
