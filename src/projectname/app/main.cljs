@@ -6,7 +6,7 @@
    [projectname.color.db :as color-db]
    [projectname.color.messenger :as color-msg]
    [projectname.common.components.container :as container]
-   [projectname.common.config :refer-macros [when-production]]
+   [projectname.common.config :refer-macros [production?]]
    [projectname.common.messenger :refer [create-messenger dispatch]]
    [projectname.common.reload :as reload]
    [rum.core :as rum]))
@@ -49,7 +49,7 @@
   "Application entry point."
   []
   ;; Setup development tools
-  (when-production false
+  (when-not (production?)
     (enable-console-print!)
     (reload/add-handler render))
 
