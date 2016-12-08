@@ -9,11 +9,9 @@
 
 (def base-url
   "Base URL where assets are located."
-  #?(:cljs (when (exists? js/require)
-             (if (identical? hot-reload true)
-               (let [os (js/require "os")]
-                 (str "http://" (.hostname os) ":3000/"))
-               (str "file://" js/__dirname "/")))))
+  #?(:cljs (if (identical? hot-reload true)
+             "http://localhost:3000/"
+             (str "file://" (js/process.cwd) "/"))))
 
 (defmacro when-production
   "Helper for evaluating code if (not) in production for tree shaking."

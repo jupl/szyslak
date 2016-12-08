@@ -81,7 +81,6 @@
                      :optimizations :none
                      :compiler-options dev-closure-opts)
                (sift :include #{#"\.cljs\.edn$" #"^\." #"/\."} :invert true)
-               (if-not server (sift :include #{#"\.out"} :invert true))
                (target)]]
     (apply comp (remove nil? tasks))))
 
