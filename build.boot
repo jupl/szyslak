@@ -66,7 +66,6 @@
   [d devcards  bool "Include devcards in build."
    s server    bool "Start a local server with dev tools and live updates."
    p port PORT int  "The port number to start the server in."]
-
   (let [dev-closure-opts
         (assoc-in
          closure-opts
