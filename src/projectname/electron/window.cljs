@@ -1,7 +1,7 @@
 (ns projectname.electron.window
   "ClojureScript API for Electron browser windows."
   (:require
-   [projectname.common.config :as config]))
+   [projectname.common.config :refer [base-url]]))
 
 (defn init-window
   "Create a new window (if it doesn't exist already) and focus."
@@ -12,6 +12,6 @@
                           (apply hash-map)
                           clj->js
                           browser-window.))
-      (.loadURL @window (str config/base-url url))
+      (.loadURL @window (str base-url url))
       (.on @window "closed" #(reset! window nil))))
   (.focus @window))

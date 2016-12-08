@@ -1,7 +1,7 @@
 (ns projectname.electron.main
   "Entry point for the main process."
   (:require
-   [projectname.common.config :refer-macros [when-production]]
+   [projectname.common.config :refer-macros [production?]]
    [projectname.electron.menu :refer [init-menu]]
    [projectname.electron.window :refer [init-window]]))
 
@@ -9,7 +9,7 @@
   "Configure and bootstrap Electron application."
   []
   (set! *main-cli-fn* identity) ;; Required for a Node application
-  (when-production false
+  (when-not (production?)
     (enable-console-print!))
   (let [app (-> "electron" js/require .-app)
         exit-app #(.quit app)

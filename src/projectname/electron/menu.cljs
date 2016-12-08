@@ -1,7 +1,7 @@
 (ns projectname.electron.menu
   "ClojureScript API for Electron menu."
   (:require
-   [projectname.common.config :as config]
+   [projectname.common.config :refer-macros [production?]]
    [projectname.electron.window :refer [init-window]]))
 
 (def menu-template
@@ -26,7 +26,7 @@
 (defn- dev-menu-item
   "Create dditional menu item for development."
   []
-  (when (identical? config/production false)
+  (when-not (production?)
     (let [devcards-window (atom nil)
           open-devcards #(init-window devcards-window "devcards.html")
           toggle-devtools #(.toggleDevTools %2)]
@@ -44,7 +44,7 @@
   (let [menu (-> "electron" js/require .-Menu)
         osx (= js/process.platform "darwin")
         pre-menu (if osx [(osx-menu-item)] [])
-        post-menu (if (identical? config/production true) [] [(dev-menu-item)])]
+        post-menu (if (production?) [] [(dev-menu-item)])]
     (as-> template x
       (into pre-menu x)
       (into x post-menu)
