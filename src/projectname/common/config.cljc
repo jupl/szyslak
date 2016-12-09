@@ -18,6 +18,6 @@
 (def base-url
   "Base URL where assets are located."
   #?(:cljs (cond
-             (hot-reload?) "http://localhost:3000/"
-             (production?) (str "file://" js/__dirname "/")
+             (identical? hot-reload true) "http://localhost:3000/"
+             (identical? production true) (str "file://" js/__dirname "/")
              :else (str "file://" (js/process.cwd) "/"))))
