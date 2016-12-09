@@ -1,5 +1,6 @@
 {
-  "name": "Application",
+  "name": "application",
+  "productName": "Application",
   "version": "0.1.0",
   "author": "John Doe",
   "description": "Application description",
