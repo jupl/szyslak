@@ -1,17 +1,8 @@
 {
   "name": "application",
   "productName": "Application",
-  "version": "0.1.0",
-  "author": "John Doe",
   "description": "Application description",
-  "build": {
-    "appId": "projectname"
-  },
-  "scripts": {
-    "pack": "build --dir",
-    "dist": "build"
-  },
-  "devDependencies": {
-    "electron": "1.4.11"
-  }
+  "homepage": "https://github.com/jupl/szyslak",
+  "author": "John Doe <john.doe@gmail.com>",
+  "version": "0.1.0"
 }

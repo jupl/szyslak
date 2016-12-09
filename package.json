@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "build": {
+    "appId": "projectname"
+  },
+  "scripts": {
+    "dev": "cd $PWD/target && electron .",
+    "package": "npm run build -- --dir",
+    "build": "build"
+  },
+  "devDependencies": {
+    "electron": "^1.4.11",
+    "electron-builder": "^10.6.1"
+  }
+}
