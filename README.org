@@ -69,7 +69,7 @@ szyslak/
 │        ├─ menu.cljs         # Helpers for working with menu
 │        └─ window.cljs       # Helpers for creating/managing windows
 ├─ boot.properties # Boot properties
-├─ build.boot      # Tasks and dependencies for propect
+├─ build.boot      # Tasks and dependencies for project
 └─ package.json    # Configuration, tasks, and dependencies for Electron builds
 #+END_EXAMPLE
 *** Entry Points
