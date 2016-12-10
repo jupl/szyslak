@@ -4,7 +4,7 @@
  :dependencies '[[adzerk/boot-cljs              "1.7.228-2" :scope "test"]
                  [adzerk/boot-reload            "0.4.13"    :scope "test"]
                  [binaryage/devtools            "0.8.3"     :scope "test"]
-                 [binaryage/dirac               "0.8.4"     :scope "test"]
+                 [binaryage/dirac               "0.8.5"     :scope "test"]
                  [crisptrutski/boot-cljs-test   "0.3.0"     :scope "test"]
                  [datascript                    "0.15.5"    :scope "test"]
                  [devcards                      "0.2.2"     :scope "test" :exclusions [cljsjs/react cljsjs/react-dom]]
