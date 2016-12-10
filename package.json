@@ -1,7 +1,7 @@
 {
   "private": true,
-  "build": {
-    "appId": "projectname"
+  "directories": {
+    "app": "target"
   },
   "scripts": {
     "dev": "node dev",
