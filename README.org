@@ -57,7 +57,7 @@ szyslak/
 │        ├─ messenger.cljs    # Helpers for basic messenger system
 │        └─ reload.cljs       # Helpers for hot reload
 ├─ boot.properties # Boot properties
-└─ build.boot      # Tasks and dependencies for propect
+└─ build.boot      # Tasks and dependencies for project
 #+END_EXAMPLE
 *** Entry Points
 When JavaScript code is built, entry points are defined by the =.cljs.edn= file inside the =resources/= directory. The entry point files reference namespaces and functions in the =src/= directory.
