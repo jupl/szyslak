@@ -44,11 +44,10 @@
 (deftask build
   "Produce a production build with optimizations."
   []
-  (let [prod-closure-opts
-        (assoc-in
-         closure-opts
-         [:closure-defines 'projectname.common.config/production]
-         true)]
+  (let [{:keys [closure-defines]} closure-opts
+        new-defines (merge closure-defines
+                           {'projectname.common.config/production true})
+        prod-closure-opts (merge closure-opts {:closure-defines new-defines})]
     (comp
      (sift :include #{#"^devcards"} :invert true)
      (cljs :optimizations :advanced
@@ -61,11 +60,11 @@
   [d devcards  bool "Include devcards in build."
    s server    bool "Start a local server with dev tools and live updates."
    p port PORT int  "The port number to start the server in."]
-  (let [dev-closure-opts
-        (assoc-in
-         closure-opts
-         [:closure-defines 'projectname.common.config/hot-reload]
-         server)
+  (let [{:keys [closure-defines]} closure-opts
+        new-defines (merge closure-defines
+                           {'projectname.common.config/devcards devcards
+                            'projectname.common.config/hot-reload server})
+        dev-closure-opts (merge closure-opts {:closure-defines new-defines})
         tasks [(if server (serve :port port))
                (if server (watch))
                (if server (speak))
@@ -82,12 +81,16 @@
 (deftask devcards
   "Produce a build containing devcards only with optimizations."
   []
-  (comp
-   (sift :include #{#"^(?!devcards).*\.cljs\.edn$"} :invert true)
-   (cljs :optimizations :advanced
-         :compiler-options closure-opts)
-   (sift :include #{#"^assets/" #"^devcards(?!\.(cljs\.edn|out))"})
-   (target)))
+  (let [{:keys [closure-defines]} closure-opts
+        new-defines (merge closure-defines
+                           {'projectname.common.config/devcards true})
+        cards-closure-opts (merge closure-opts {:closure-defines new-defines})]
+    (comp
+     (sift :include #{#"^(?!devcards).*\.cljs\.edn$"} :invert true)
+     (cljs :optimizations :advanced
+           :compiler-options cards-closure-opts)
+     (sift :include #{#"^assets/" #"^devcards(?!\.(cljs\.edn|out))"})
+     (target))))
 
 (deftask lint
   "Check and analyze source code."
