@@ -4,7 +4,7 @@
     "appId": "projectname"
   },
   "scripts": {
-    "dev": "cd $PWD/target && electron .",
+    "dev": "node dev",
     "package": "npm run build -- --dir",
     "build": "build"
   },
