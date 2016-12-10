@@ -1,7 +1,7 @@
 (ns projectname.electron.menu
   "ClojureScript API for Electron menu."
   (:require
-   [projectname.common.config :refer-macros [production?]]
+   [projectname.common.config :refer-macros [devcards? production?]]
    [projectname.electron.window :refer [init-window]]))
 
 (def menu-template
