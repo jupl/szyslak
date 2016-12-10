@@ -23,13 +23,18 @@ This is a boilerplate project for developing desktop applications with [[http://
   - [[http://openjdk.java.net/install/index.html][OpenJDK]]
   - [[http://www.oracle.com/technetwork/java/javase/downloads/index.html][Oracle]]
 - [[http://boot-clj.com/][Boot]]
+- [Node.js](https://nodejs.org/en/)
+  - [npm CLI](https://docs.npmjs.com/cli/npm) is usually included with Node.js
+- [Yarn](https://yarnpkg.com/en/docs/install) (recommended)
 
 ^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}
 
 ** Getting Started
 1. Follow the [[https://github.com/boot-clj/boot#install][instructions for installing Boot]]
-2. Follow the [[https://github.com/electron-userland/electron-prebuilt#installation][instructions for installing electron-prebuilt]]
-3. Clone/download this repository
+2. Clone/download this repository
+3. Install dependencies using npm *or* Yarn:
+  - =npm install=
+  - =yarn=
 4. Start running tasks as described below in the [[#tasks][tasks section]]
 
 ^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}
@@ -64,7 +69,8 @@ szyslak/
 │        ├─ menu.cljs         # Helpers for working with menu
 │        └─ window.cljs       # Helpers for creating/managing windows
 ├─ boot.properties # Boot properties
-└─ build.boot      # Tasks and dependencies for propect
+├─ build.boot      # Tasks and dependencies for propect
+└─ package.json    # Configuration, tasks, and dependencies for Electron builds
 #+END_EXAMPLE
 *** Entry Points
 When JavaScript code is built, entry points are defined by the =.cljs.edn= file inside the =resources/= directory. The entry point files reference namespaces and functions in the =src/= directory.
@@ -74,22 +80,32 @@ When JavaScript code is built, entry points are defined by the =.cljs.edn= file 
 ** Tasks
 Tasks can be executed in the following manner:
 #+BEGIN_EXAMPLE
-boot [command]
+boot [command]    # Boot
+npm run [command] # NPM
+yarn [command]    # Yarn
 #+END_EXAMPLE
 Examples:
 #+BEGIN_EXAMPLE
 boot dev -s -p 8000
-boot build
+boot dev && yarn dev
+boot build && npm run build
 #+END_EXAMPLE
+*** =npm run dev= / =yarn dev=
+Start a simple Electron application for development purposes using [[https://github.com/electron-userland/electron-prebuilt][electron-prebuilt]]. This assumes that there is a build available in the =target/= directory. (=boot dev=, =boot build=)
+*** =npm run package= / =yarn package=
+Build an unpackaged application using [[https://github.com/electron-userland/electron-builder][electron-builder]]. This assumes that there is a build available in the =target/= directory. (=boot build=)
+*** =npm run build= / =yarn build=
+Build and package application using [[https://github.com/electron-userland/electron-builder][electron-builder]]. This assumes that there is a build available in the =target/= directory. (=boot build=)
 *** =boot dev [-d] [-s] [-p PORT]=
 Create a development build with source maps.
+- For development with Electron use the command =boot dev && npm run dev= or =boot dev && yarn dev=.
 - If you want to include Devcards, use the =-d= option.
 - If you want to run a local server with live updates and a REPL, use the =-s= option. The =-p= option is also available to specify the port number.
-After this is run (or is running with =-s=) you can switch to the =target/= directory and use [[https://github.com/electron-userland/electron-prebuilt][electron-prebuilt]] with the command =electron .=.
+  - To run Electron the command =npm run dev= or =yarn dev= would need to be run in a separate window instead of the above.
 *** =boot build=
 Create a production build with optimizations.
-*** =boot serve build [-p PORT]=
-Create a production build with optimizations, and serve on a static server.
+- To preview the application the command =boot build && npm run package= or =boot build && yarn package= will generate an unpackaged application.
+- To build and package use the command =boot build && npm run build= or =boot build && yarn build=.
 *** =boot devcards=
 Create a standalone build of devcards only.
 *** =boot test=
@@ -114,5 +130,7 @@ Check and analyze source code.
   - [[https://github.com/boot-clj/boot-cljs-devtools][Boot CLJS DevTools]]
 - Build Tools
   - [[https://github.com/boot-clj/boot][Boot]]
+  - [[https://github.com/electron-userland/electron-builder][electron-builder]]
+  - [[https://github.com/electron-userland/electron-prebuilt][electron-prebuilt]]
 
 ^{[[#szyslak-clojurescript--rum--datascript][Back to top]]}
