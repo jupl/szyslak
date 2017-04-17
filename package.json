@@ -4,7 +4,7 @@
     "app": "target"
   },
   "scripts": {
-    "dev": "node dev",
+    "dev": "cd target && electron .",
     "package": "npm run build -- --dir",
     "build": "build"
   },
