@@ -1,7 +1,9 @@
 {
   "private": true,
-  "directories": {
-    "app": "target"
+  "build": {
+    "directories": {
+      "app": "target"
+    }
   },
   "scripts": {
     "dev": "cd target && electron .",
