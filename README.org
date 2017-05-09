@@ -49,7 +49,7 @@ szyslak/
 │  ├─ app.html          # HTML to present application
 │  ├─ devcards.cljs.edn # Devcards entry point
 │  ├─ devcards.html     # HTML to present Devcards
-│  ├─ index.cljs.edn    # Electron application entry point
+│  ├─ main.cljs.edn     # Electron application entry point
 │  └─ package.json      # Project information for Electron application
 ├─ src/
 │  └─ projectname/            # Project namespace

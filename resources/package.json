@@ -4,5 +4,6 @@
   "description": "Application description",
   "homepage": "https://github.com/jupl/szyslak",
   "author": "John Doe <john.doe@gmail.com>",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "main": "./main.js"
 }
